@@ -1,5 +1,5 @@
 {
-  "name": "cdn-validation",
+  "name": "@mrnjifanda/popup-api-js",
   "version": "1.0.0",
   "description": "Class de validation",
   "main": "validation.js",

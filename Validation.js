@@ -2,12 +2,12 @@ class Validation {
     constructor(api_key, password) {
       this.api_key = api_key;
       this.password = password;
+
       this.WindowObjectReference = null;
+      this.body = document.body;
     }
 
-    verify() {
-        // return this.calcArea();
-    }
+    verify() {}
 
     openPopup (width = 500, height = 600) {
 
@@ -24,10 +24,22 @@ class Validation {
             this.WindowObjectReference = window.open(
                 "http://www.njifanda.com/",
                 "Face verification",
-                "resizable=no, dialog=yes, scrollbars=auto, menubar=no, toolbar=no, directories=no, location=no, status=no, top="+top+", left="+left+", width="+width+", height="+height+""
+                "resizable=no, dialog=yes, scrollbars=auto, menubar=no, toolbar=no, directories=no, location=no, status=no, top="+top+", left="+left+", width="+width+", height="+height
             );
-
+    
             this.hideBody();
+
+            const checkPopup = setInterval(() => {
+                if(this.WindowObjectReference === null || this.WindowObjectReference.closed){
+                    this.showBody();
+                    clearInterval(checkPopup);
+                }
+            }, 1000);
+
+            // const currentInstance = this;
+            // this.WindowObjectReference.onbeforeunload = function(){
+            //     currentInstance.showBody();
+            // }
         }
 
         this.focusPopup();
@@ -35,62 +47,44 @@ class Validation {
 
     closePopup() {
         if(this.WindowObjectReference !== null && !this.WindowObjectReference.closed){
+
             if (confirm("Voulez vous vraiment fermer cette fenetre ?")) {
                 this.WindowObjectReference.window.close();
-                // this.showBody();
-                const body = document.body;
-
-                // const div = document.querySelector('#popup-validation-face');
-                body.removeAttribute('onclick');
-                body.removeAttribute('onFocus');
+                this.showBody();
+                return true;
             }
-        } else {
+
             this.focusPopup();
         }
-
-
-        // const WindowObjectReference = this.WindowObjectReference;
-        // const showBody = this.showBody;
-
-        // // window.onfocus = function() {
-        // //     if (confirm("Voulez vous vraiment fermer cette fenetre ?")) {
-        // //         WindowObjectReference.window.close();
-        // //         showBody();
-        // //     }
-        // // }
     }
 
     focusPopup() {
         this.WindowObjectReference.focus();
-        // if(this.WindowObjectReference && !this.WindowObjectReference.closed) {
-        //     this.WindowObjectReference.focus();
-        // }
     }
 
     hideBody () {
-        // // const div = document.createElement('div');
-        // const body = document.body;
-        // // div.setAttribute('id', 'popup-validation-face');
-        // // div.style.position = 'absolute';
-        // // div.style.top = 0;
-        // // div.style.left = 0;
-        // // div.style.width = '100%';
-        // // div.style.height = '100%';
-        // // div.style.background = 'rgb(0 0 0 / 60%)';
-        // // div.style.zIndex = 9999;
+        const div = document.createElement('div');
+        div.setAttribute('id', 'popup-validation-face');
+        div.setAttribute('onclick', 'closePopup()');
+        div.setAttribute('onFocus', 'closePopup()');
 
-        // body.prepend(div);
-    
-        const body = document.body;
+        div.style.position = 'absolute';
+        div.style.top = 0;
+        div.style.left = 0;
+        div.style.width = '100%';
+        div.style.height = '100%';
+        div.style.background = 'rgb(0 0 0 / 60%)';
+        div.style.zIndex = 9999;
 
-        body.setAttribute('onclick', 'closePopup()');
-        body.setAttribute('onFocus', 'closePopup()');
+        this.body.prepend(div);
     }
 
     showBody () {
-        const div = document.getElementById("popup-validation-face");
+        const div = this.body.querySelector("div#popup-validation-face");
         if (div) {
-            document.body.removeChild(div);
+            div.removeAttribute('onclick');
+            div.removeAttribute('onFocus');
+            this.body.removeChild(div);
         }
     }
 }

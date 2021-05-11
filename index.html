@@ -16,16 +16,14 @@
 
         const Auth = new Validation('api_key', 'password');
 
-        function closePopup() {
-            Auth.closePopup();
-        }
-
         document.querySelector('#open').addEventListener('click', e => {
             e.preventDefault();
             Auth.openPopup();
         });
 
-
+        function closePopup() {
+            Auth.closePopup();
+        }
 
     </script>
 </body>
