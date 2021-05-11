@@ -7,5 +7,19 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Mr NJIFANDA",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrnjifanda/popup-api-js.git"
+  },
+  "keywords": [
+    "CDN",
+    "Popup",
+    "Lock",
+    "Child"
+  ],
+  "bugs": {
+    "url": "https://github.com/mrnjifanda/popup-api-js/issues"
+  },
+  "homepage": "https://github.com/mrnjifanda/popup-api-js#readme"
 }
