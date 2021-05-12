@@ -1,30 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test open window</title>
 </head>
+
 <body>
+    <div id="container-face-button"></div>
 
-    <a href="#open" id="open">Open window</a>
-
-    <script src="Validation.js"></script>
-
-    <script>
-
-        const Auth = new Validation('api_key', 'password');
-
-        document.querySelector('#open').addEventListener('click', e => {
-            e.preventDefault();
-            Auth.openPopup();
-        });
-
-        function closePopup() {
-            Auth.closePopup();
-        }
-
-    </script>
+    <script
+        src="face-validation.js"
+        data-api-key="api-key"
+        data-api-password="api-password"
+        data-success-url="success-url"
+        data-cansel-url="success-url"
+        data-api-id-button='{"id": "container-face-button", "label": "Open face validation"}'
+        id="seven-web-face-script"
+    ></script>
 </body>
+
 </html>
